@@ -5,13 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
 
-            <div class="list-group">
-            @foreach($users as $user)
-                <a href="#" class="list-group-item list-group-item-action active">
-                    {{ $user->name }}
-                </a>
-            @endforeach
-            </div>
+            @include('common.users_list', [
+                'users' => $users
+            ])
 
         </div>
         <div class="col-md-8">
@@ -31,4 +27,4 @@
         </div>
     </div>
 </div>
-@endsection
+@append
