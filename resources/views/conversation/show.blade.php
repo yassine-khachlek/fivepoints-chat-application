@@ -16,6 +16,8 @@
 
                 <div class="card-body">
 
+                	<div style="overflow-y: scroll;height: 500px;">
+
                 	@foreach($messages as $message)
 
                 		<small>{{ $message->created_at }}</small> 
@@ -27,6 +29,8 @@
                 		<br>
 
                 	@endforeach
+
+                	</div>
 
 		        	@include('conversation.form', [
 		        		

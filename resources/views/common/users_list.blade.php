@@ -1,4 +1,4 @@
-<div class="list-group">
+<div class="list-group" style="overflow-y: scroll;height: 704px;">
 @foreach($users as $user)
 
 	@if($user->id != Auth::user()->id)
