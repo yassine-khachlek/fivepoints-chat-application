@@ -11,11 +11,11 @@ services:
             - ../../../:/var/www
             - ../../../storage/app/public:/var/www/public/storage
         ports:
-            - "80:80"
+            - "8080:80"
         links:
             - php
-        mem_limit: 128000000
-        memswap_limit: 256000000
+        mem_limit: 64000000
+        memswap_limit: 128000000
 
     php:
         container_name: dev_php
@@ -30,8 +30,8 @@ services:
             - "DB_PORT=3306"
         links:
             - mysql
-        mem_limit: 1024000000
-        memswap_limit: 1536000000
+        mem_limit: 128000000
+        memswap_limit: 256000000
 
     mysql:
         container_name: dev_mysql
@@ -40,7 +40,7 @@ services:
             dockerfile: Dockerfile
         command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
         volumes:
-            - ../../../storage/database/mysql:/var/lib/mysql
+            - ../../../mysql:/var/lib/mysql
         ports:
             - "3306:3306"
         environment:
@@ -48,5 +48,5 @@ services:
             - "MYSQL_DATABASE=homestead"
             - "MYSQL_USER=homestead"
             - "MYSQL_PASSWORD=secret"
-        mem_limit: 1536000000
-        memswap_limit: 2048000000
+        mem_limit: 512000000
+        memswap_limit: 1024000000

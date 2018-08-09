@@ -2,9 +2,21 @@
 
 # Install
 
-Please refer to Laravel install documentation [Here](https://laravel.com/docs/5.4#installation) 
+Please refer to Laravel install documentation [Here](https://laravel.com/docs/5.4#installation)
 
-Once your environnment is up, make sure to update the .env file then run the migration:
+Once your environnment is up, copy the .env.example to .env
+
+```shell
+cp .env.example .env
+```
+
+Regenerate the application key:
+
+```shell
+php artisan key:generate
+```
+
+Run the migration:
 
 ```shell
 php artisan migrate:refresh --seed
@@ -16,6 +28,15 @@ user0@example.com:secret
 user1@example.com:secret
 ...
 user19@example.com:secret
+
+### Important:
+
+Please always verify the directories permission if you got running issues.
+
+```shell
+sudo chgrp -R www-data storage bootstrap/cache
+sudo chmod -R ug+rwx storage bootstrap/cache
+```
 
 To Do:
 
