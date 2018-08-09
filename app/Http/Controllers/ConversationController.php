@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Message;
 use App\Events\MessageEvent;
+use App\Http\Controllers\Api\ConversationController as ApiConversationController;
 
 class ConversationController extends Controller
 {
@@ -48,15 +49,7 @@ class ConversationController extends Controller
      */
     public function store(Request $request)
     {
-        $message = Message::create([
-            'sender_id' => Auth::user()->id,
-            'receiver_id' => $request->get('receiver_id'),
-            'body' => $request->get('body'),
-        ]);
-
-        $event = new MessageEvent($message);
-
-        event($event);
+        $message = (new ApiConversationController())->store($request);
 
         return back();
     }
