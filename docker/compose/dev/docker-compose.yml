@@ -1,0 +1,52 @@
+version: '2'
+
+services:
+
+    nginx:
+        container_name: dev_nginx
+        build:
+            context: ./nginx/
+            dockerfile: Dockerfile
+        volumes:
+            - ../../../:/var/www
+            - ../../../storage/app/public:/var/www/public/storage
+        ports:
+            - "80:80"
+        links:
+            - php
+        mem_limit: 128000000
+        memswap_limit: 256000000
+
+    php:
+        container_name: dev_php
+        build:
+            context: ./php/
+            dockerfile: Dockerfile
+        volumes:
+            - ../../../:/var/www
+            - ../../../storage/app/public:/var/www/public/storage
+        environment:
+            - "DB_HOST=mysql"
+            - "DB_PORT=3306"
+        links:
+            - mysql
+        mem_limit: 1024000000
+        memswap_limit: 1536000000
+
+    mysql:
+        container_name: dev_mysql
+        build:
+            context: ./mysql/
+            dockerfile: Dockerfile
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        volumes:
+            - ../../../storage/database/mysql:/var/lib/mysql
+        ports:
+            - "3306:3306"
+        environment:
+            - "MYSQL_ROOT_PASSWORD=secret"
+            - "MYSQL_DATABASE=homestead"
+            - "MYSQL_USER=homestead"
+            - "MYSQL_PASSWORD=secret"
+        mem_limit: 1536000000
+        memswap_limit: 2048000000
