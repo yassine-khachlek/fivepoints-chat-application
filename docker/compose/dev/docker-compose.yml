@@ -28,8 +28,12 @@ services:
         environment:
             - "DB_HOST=mysql"
             - "DB_PORT=3306"
+            - "REDIS_HOST=redis"
+            - "REDIS_PASSWORD=null"
+            - "REDIS_PORT=6379"
         links:
             - mysql
+            - redis
         mem_limit: 128000000
         memswap_limit: 256000000
 
@@ -50,3 +54,24 @@ services:
             - "MYSQL_PASSWORD=secret"
         mem_limit: 512000000
         memswap_limit: 1024000000
+
+    redis:
+        container_name: dev_redis
+        build:
+            context: ./redis/
+            dockerfile: Dockerfile
+        ports:
+            - "6379:6379"
+
+    socket:
+        container_name: dev_node
+        build:
+            context: ./node/
+            dockerfile: Dockerfile
+        volumes:
+            - ../../../socket-server:/socket-server
+        links:
+            - redis
+        command: node /socket-server/server.js
+        ports:
+            - "3000:3000"
