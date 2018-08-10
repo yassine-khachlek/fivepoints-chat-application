@@ -16,7 +16,7 @@
 
                 <div class="card-body">
 
-                	<div style="overflow-y: scroll;height: 500px;">
+                	<div id="conversation-messages" style="overflow-y: scroll;height: 500px;">
 
                 	@foreach($messages as $message)
 

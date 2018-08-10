@@ -20,3 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('conversation', 'ConversationController');
+
+Route::resource('api\conversation', 'Api\ConversationController')->names([
+    'store' => 'api.conversation.store'
+])->only([
+	'store'
+]);
