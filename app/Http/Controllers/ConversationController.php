@@ -69,7 +69,7 @@ class ConversationController extends Controller
         })
         ->orWhere(function ($q) use ($sender_id) {
             $q->where('sender_id', Auth::user()->id)->where('receiver_id', $sender_id);
-        })->get();
+        })->orderBy('created_at', 'desc')->limit(10)->get()->reverse();
 
         return view('conversation.show', compact('users', 'messages', 'sender_id'));
     }
