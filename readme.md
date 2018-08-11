@@ -29,6 +29,36 @@ user1@example.com:secret
 ...
 user19@example.com:secret
 
+After this you can use the included docker environment, docker engine and docker compose should be available in your machine [Here](https://docs.docker.com/engine/#installation-guides) [Here](https://docs.docker.com/compose/install/) just by running the shell script:
+
+```shell
+sudo docker/compose/dev/up.sh
+```
+
+To stop docker container:
+
+```shell
+sudo docker/compose/dev/down.sh
+```
+
+If you are not using docker you have the change below:
+
+For real-time messaging you need to run the node server, so first update the redis host in ./socket-server/server.js line 7 as below:
+
+```js
+var redis = new Redis({
+  host: '127.0.0.1',    // Redis host
+  ...
+});
+```
+Then run:
+
+```shell
+node ./socket-server/server.js
+```
+
+Of course in a production environment a tool like PM2 should be used to manage node processes.
+
 ### Important:
 
 Please always verify the directories permission if you got running issues.
@@ -40,7 +70,7 @@ sudo chmod -R ug+rwx storage bootstrap/cache
 
 To Do:
 
-- Add real time messaging using Laravel Echo based in nodejs to push messages to users
+- Code cleaning
 
 ### Contact:
 
