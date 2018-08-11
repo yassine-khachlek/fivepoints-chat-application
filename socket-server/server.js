@@ -28,13 +28,14 @@ redis.psubscribe('*', function(err, count) {
     if (err) {
         console.log(err);
     }
+    console.log(count);
 });
 
 redis.on('pmessage', function(subscribed, channel, message) {
     message = JSON.parse(message);
     //console.log(subscribed);
     //console.log(channel);
-    //console.log(message);
+    console.log(message);
     //io.emit(channel + ':' + message.event, message.data);
     io.emit('MessageEvent', message.data.data);
 });

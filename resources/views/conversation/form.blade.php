@@ -23,10 +23,15 @@
 		});
 
 		request.done(function( msg ) {
+
+			$("#conversation-messages").append('{{ Auth::user()->name }}: ' + msg.body + '<br><small>' + msg.created_at + '</small><br>');
+
+            $("#conversation-messages").animate({ scrollTop: $('#conversation-messages').prop("scrollHeight")}, 1000);
+
 		  $("#conversation-messages").animate({ scrollTop: $('#conversation-messages').prop("scrollHeight")}, 1000);
 
 		  $( "#conversation-form-body" ).val('');
-		  console.log(msg);
+		  //console.log(msg);
 		});
 		 
 		request.fail(function( jqXHR, textStatus ) {

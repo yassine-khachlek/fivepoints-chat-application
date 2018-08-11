@@ -79,26 +79,6 @@
     <script src="{{ asset('components/jquery/dist/jquery.min.js') }}"></script>
     <script src="//{{ Request::getHost() }}:3000/socket.io/socket.io.js"></script>
 
-    <script>
-      $( document ).ready(function() {
-
-        var socket = io.connect('//{{ Request::getHost() }}:3000', {path: '/socket.io'});
-
-        socket.on('connect', function(){
-          console.log('Connected as ' + socket.io.engine.id);
-        });
-
-        socket.on('disconnect', function(){
-          console.log('Disconnected');
-        });
-
-        socket.on('MessageEvent', function(msg){
-          console.log(msg);
-        });
-
-      });
-    </script>
-
     @yield('scripts')
 
 </body>
