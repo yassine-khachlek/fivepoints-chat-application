@@ -41,6 +41,12 @@ To stop docker container:
 sudo docker/compose/dev/down.sh
 ```
 
+The application will be available on:
+
+```shell
+http:://127.0.0.1:8080
+```
+
 If you are not using docker you have the change below:
 
 For real-time messaging you need to run the node server, so first update the redis host in ./socket-server/server.js line 7 as below:
